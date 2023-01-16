@@ -3,27 +3,24 @@ import { Box, Button, Divider, IconButton, Typography } from "@mui/material";
 import AddOutlinedIcon from '@mui/icons-material/AddOutlined';
 import CloseIcon from '@mui/icons-material/Close';
 import RemoveIcon from '@mui/icons-material/Remove';
-import { decreaseCount,increaseCount, removeFromCart,setIsCartOpen } from "../../state/cartReducer";
+import AddIcon from '@mui/icons-material/Add';
+import { decreaseCount,increaseCount, removeFromCart, setIsCartOpen } from "../../state/cartReducer";
 import { useNavigate } from "react-router-dom";
 import { Dialog, Transition } from '@headlessui/react'
 import { Fragment, useState } from 'react'
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 
 
-const CartMenu = ({id, image, title, price, count,url}) => {
+const CartMenu = () => {
     const navigate =useNavigate()
     const dispatch = useDispatch()
     const cart = useSelector((state)=>state.cart.cart)
+    
     console.log("cart", cart)
     const isCartOpen = useSelector((state)=> state.cart.isCartOpen)
-    const totalPrice = () => {
-        let total = 0;
-        products.forEach((product) => {
-          total += product.count * product.price;
-        });
-        return total.toFixed(2);
-      };
-    
+    const totalPrice = cart.reduce((total, item) => {
+      return total + item.count * item.attributes.price;
+    }, 0);
 
       
   return (
@@ -77,7 +74,7 @@ const CartMenu = ({id, image, title, price, count,url}) => {
                               <li key={product?.id} className="flex py-6">
                                 <div className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
                                   <img
-                                    src={`http://localhost:1337${product?.attributes?.image?.data?.attributes?.formats?.medium?.url}`}
+                                    src={`http://localhost:1337${product?.attributes?.image?.data?.attributes?.formats?.thumbnail?.url}`}
                                     alt={product?.name}
                                     className="h-full w-full object-cover object-center"
                                   />
@@ -89,17 +86,35 @@ const CartMenu = ({id, image, title, price, count,url}) => {
                                       <h3>
                                         {product?.attributes?.name}
                                       </h3>
-                                      <p className="ml-4">{product?.attribute?.price}</p>
+                                      <p className="ml-4">RM {product?.attributes?.price*product?.count} </p>
                                     </div>
-                                    <p className="mt-1 text-sm text-gray-500"></p>
+                                    <p className="mt-1 text-sm text-gray-500 capitalize">
+                                      {product?.attributes?.category}
+                                    </p>
                                   </div>
                                   <div className="flex flex-1 items-end justify-between text-sm">
-                                    <p className="text-gray-500">Qty {product?.count}</p>
+                                    {/* <p className="text-gray-500">Qty: {product?.count}</p> */}
+                                     <div className='py-4 text-gray-500 font-bold'>
+                    <button className='border px-2 py-1 text-center' onClick={() =>
+                            dispatch(decreaseCount({ id: product.id }))
+                          }>
+                        <RemoveIcon fontSize='8px'/>
+                    </button>
+                    
+                    <button className='py-1 px-4 border cursor-auto' >{product.count}</button>
+                    <button className='border px-2 py-1 text-center' onClick={() =>
+                            dispatch(increaseCount({ id: product.id }))
+                          }>
+                        <AddIcon fontSize='8px'/>
+                    </button>
 
+                    
+                </div>
                                     <div className="flex">
                                       <button
                                         type="button"
-                                        className="font-medium text-indigo-600 hover:text-indigo-500"
+                                        className="font-medium text-blue-900 hover:text-blue-700"
+                                      
                                       >
                                         Remove
                                       </button>
@@ -116,13 +131,13 @@ const CartMenu = ({id, image, title, price, count,url}) => {
                     <div className="border-t border-gray-200 py-6 px-4 sm:px-6">
                       <div className="flex justify-between text-base font-medium text-gray-900">
                         <p>Subtotal</p>
-                        <p>${totalPrice}</p>
+                        <p>RM {totalPrice}</p>
                       </div>
                       <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                       <div className="mt-6">
                         <a
                           href="#"
-                          className="flex items-center justify-center rounded-md border border-transparent bg-indigo-600 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-indigo-700"
+                          className="flex items-center justify-center rounded-md border border-transparent bg-blue-900 px-6 py-3 text-base font-medium text-white shadow-sm hover:bg-blue-700"
                         >
                           Checkout
                         </a>
@@ -132,7 +147,7 @@ const CartMenu = ({id, image, title, price, count,url}) => {
                           
                           <button
                             type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                            className="font-medium text-blue-900 hover:text-blue-700"
                             onClick={()=> dispatch(setIsCartOpen({}))}
                           >
                             Continue Shopping

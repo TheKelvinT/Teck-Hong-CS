@@ -4,7 +4,6 @@ import ContactUs from "./scenes/contact-us/ContactUs";
 import CartMenu from "./scenes/global/CartMenu";
 import Footer from "./scenes/global/Footer";
 import Navbar from "./scenes/global/Navbar";
-import CatNav from "./scenes/home/CatBar";
 import Home from "./scenes/home/Home";
 import { Toaster } from "react-hot-toast";
 

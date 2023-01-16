@@ -16,9 +16,9 @@ const ProductList = () => {
     const products = useSelector((state => state.cart.products))
     console.log("products", products)
 
-    const handleChange = (event, newValue) => {
-        setValue(newValue)
-    }
+    // const handleChange = (event, newValue) => {
+    //     setValue(newValue)
+    // }
   
 async function getProducts(){
     const products = await fetch("http://localhost:1337/api/products?populate=*", {method:"GET"});
@@ -63,10 +63,10 @@ const beefProducts = products.filter(
       <div className=" w-4/5 mx-auto max-w-2xl py-12 px-4 sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8">
       <h3 className='text-center font-bold text-2xl text-blue-900 mb-8' >Our Products</h3>
         <Tab.Group>
-<Tab.List  className="grid grid-cols-2 space-x-1  sm:grid-cols-4 md:grid-cols-8 font-bold rounded-xl bg-secondary-300 py-2.5 px-4 outline-none" >
-<Tab className={({ selected }) =>
+          <Tab.List  className="grid grid-cols-2 gap-1 md:grid-cols-7 sm:grid-cols-4 font-bold rounded-xl bg-secondary-300 py-2.5 px-4 outline-none" >
+            <Tab className={({ selected }) =>
                 classNames(
-                  'w-full rounded-lg py-2.5 outline-none  text-md  text-gray-50',
+                  'w-full rounded-lg py-2.5 outline-none text-md  text-gray-50',
                   '',
                   selected
                     ? 'bg-white/[0.22] font-bold'
@@ -171,16 +171,10 @@ const beefProducts = products.filter(
     </Tab.Panels>
     
 </Tab.Group>
-        <div className="grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 xl:gap-x-8">
-          
-        </div>
+      
       </div>
     </div>
 
-
-
-
-  
   </>
   )
 }

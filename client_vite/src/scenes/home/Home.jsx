@@ -1,4 +1,4 @@
-import CatBar from "./CatBar";
+
 import ProductList from "./ProductList";
 
 

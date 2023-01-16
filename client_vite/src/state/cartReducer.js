@@ -16,12 +16,11 @@ export const cartSlice = createSlice({
     },
 
     addToCart: (state, action) => {
-      const item = state.cart.find(
+      const Cartitem = state.cart.find(
         (product) => product.id === action.payload.id
       );
 
-      console.log(item);
-      if (item) {
+      if (Cartitem) {
         item.count += action.payload.count;
       } else {
         return {
@@ -32,23 +31,24 @@ export const cartSlice = createSlice({
     },
 
     removeFromCart: (state, action) => {
-      state.products = state.products.filter(
-        (product) => product.id !== action.payload
+      state.cart = state.cart.filter(
+        (product) => product.id !== action.payload.id
       );
     },
     resetCart: (state, action) => {
       state.products = [];
     },
     increaseCount: (state, action) => {
-      state.products = state.products.map((product) => {
+      state.cart = state.cart.map((product) => {
         if (product.id === action.payload.id) {
           product.count++;
         }
         return product;
       });
     },
+
     decreaseCount: (state, action) => {
-      state.products = state.products.map((item) => {
+      state.cart = state.cart.map((product) => {
         if (product.id === action.payload.id && product.count > 1) {
           product.count--;
         }

@@ -38,5 +38,5 @@ module.exports = {
       "3/4": "75%",
     },
   },
-  plugins: [require("@tailwindcss/aspect-ratio")],
+  plugins: [require("@tailwindcss/aspect-ratio"), "@tailwindcss/forms"],
 };
