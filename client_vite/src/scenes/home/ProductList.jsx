@@ -2,33 +2,63 @@ import React,{useEffect, useState} from 'react'
 import Product from '../../components/Product'
 import { useDispatch, useSelector } from 'react-redux'
 import { setProducts } from '../../state/cartReducer'
-
-
 import { Tab } from '@headlessui/react'
+import ErrorPage from '../fetchStatus/ErrorPage'
+import LoadingProducts from '../fetchStatus/LoadingProducts'
+
+
 
 function classNames(...classes) {
     return classes.filter(Boolean).join(' ')
   }
   
 const ProductList = () => {
+
     const dispatch = useDispatch();
     const [value, setValue] = useState("all")
+    const [isLoading, setIsLoading] = useState(false);
+   const [error, setError] = useState(null);
     const products = useSelector((state => state.cart.products))
     console.log("products", products)
 
-    // const handleChange = (event, newValue) => {
-    //     setValue(newValue)
-    // }
-  
+    const cardStyles=`grid grid-cols-1 gap-y-10 gap-x-6 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-x-8 col-span-1  `
+   
 async function getProducts(){
-    const products = await fetch("http://localhost:1337/api/products?populate=*", {method:"GET"});
-    const productsJson = await products.json();
-    dispatch(setProducts(productsJson.data))
-}
+    setIsLoading(true);
+    const pause = (duration) => {
+      return new Promise((resolve) => {
+        setTimeout(resolve, duration);
+      });
+    };
+    try {
+      const res = await fetch( "http://localhost:1337/api/products?populate=*" , {method:"GET"});
+      await pause(3000)
+      const productsJson = await res.json();
+      dispatch(setProducts(productsJson.data))
+      setIsLoading(false);
+    } catch (error) {
+      setError(error);
+      setIsLoading(false);
+    }
+  }
+   
+   
 
 useEffect(()=>{
     getProducts()
+   
+    
+    
 },[])
+
+if (error) {
+  return <ErrorPage error ={error}/> ;
+}
+
+if (isLoading) {
+  return <LoadingProducts/>;
+}
+
 
 const beefProducts = products.filter(
     (product) => product.attributes.category === "beef"
@@ -132,38 +162,38 @@ const beefProducts = products.filter(
 
 </Tab.List>
 <Tab.Panels className="mt-8 ">
-    <Tab.Panel className="grid grid-cols-1 gap-y-10 gap-x-6 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-x-8">{value === "all" &&
+    <Tab.Panel className={cardStyles}>{value === "all" &&
           products.map((product) => (
             <Product product={product} key={`${product.name}-${product.id}`} />
           ))}
     </Tab.Panel>
-    <Tab.Panel className="grid grid-cols-1 gap-y-10 gap-x-6 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-x-8">{
+    <Tab.Panel className={cardStyles}>{
           chickenProducts.map((product) => (
             <Product product={product} key={`${product.name}-${product.id}`} />
           ))}
     </Tab.Panel>
 
-    <Tab.Panel className="grid grid-cols-1 gap-y-10 gap-x-6 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-x-8"> {
+    <Tab.Panel className={cardStyles}> {
           beefProducts.map((product) => (
             <Product product={product} key={`${product.name}-${product.id}`} />
           ))}
     </Tab.Panel>
-    <Tab.Panel className="grid grid-cols-1 gap-y-10 gap-x-6 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-x-8"> {
+    <Tab.Panel className={cardStyles}> {
           lambProducts.map((product) => (
             <Product product={product} key={`${product.name}-${product.id}`} />
           ))}
     </Tab.Panel>
-    <Tab.Panel className="grid grid-cols-1 gap-y-10 gap-x-6 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-x-8"> {
+    <Tab.Panel className={cardStyles}> {
           seafoodProducts.map((product) => (
             <Product product={product} key={`${product.name}-${product.id}`} />
           ))}
     </Tab.Panel>
-    <Tab.Panel className="grid grid-cols-1 gap-y-10 gap-x-6 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-x-8"> {
+    <Tab.Panel className={cardStyles}> {
           japaneseProducts.map((product) => (
             <Product product={product} key={`${product.name}-${product.id}`} />
           ))}
     </Tab.Panel>
-    <Tab.Panel className="grid grid-cols-1 gap-y-10 gap-x-6 xs:grid-cols-2 sm:grid-cols-3 md:grid-cols-4 xl:gap-x-8"> {
+    <Tab.Panel className={cardStyles}> {
           othersProducts.map((product) => (
             <Product product={product} key={`${product.name}-${product.id}`} />
           ))}
@@ -173,6 +203,7 @@ const beefProducts = products.filter(
 </Tab.Group>
       
       </div>
+   
     </div>
 
   </>

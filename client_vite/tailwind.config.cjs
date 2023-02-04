@@ -3,6 +3,7 @@ module.exports = {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      brightness: ["hover"],
       colors: {
         "gray-50": "#F7F7F7",
         "gray-400": "#7D7D7D",
@@ -38,5 +39,9 @@ module.exports = {
       "3/4": "75%",
     },
   },
-  plugins: [require("@tailwindcss/aspect-ratio"), "@tailwindcss/forms"],
+  plugins: [
+    require("tailwind-scrollbar"),
+    require("@tailwindcss/aspect-ratio"),
+    "@tailwindcss/forms",
+  ],
 };

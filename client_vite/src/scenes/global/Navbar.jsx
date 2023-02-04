@@ -3,7 +3,6 @@ import ShoppingCartOutlinedIcon from '@mui/icons-material/ShoppingCartOutlined';
 import FacebookOutlinedIcon from '@mui/icons-material/FacebookOutlined';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
-import logo from '../../assets/logo.png'
 import { IconButton, Badge, ariaHidden } from '@mui/material';
 import MenuOutlinedIcon from '@mui/icons-material/MenuOutlined';
 import ClearOutlinedIcon from '@mui/icons-material/ClearOutlined';
@@ -11,12 +10,15 @@ import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import { Menu, Disclosure, Transition, Tab } from '@headlessui/react';
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsCartOpen } from "../../state/cartReducer";
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
+import Logo from '../../components/Logo';
+import NavigationPage from '../../components/NavigationPage';
 
 
 
 const Navbar = () => {
     const dispatch = useDispatch()
+    const location = useLocation();
     const cart = useSelector((state) => state.cart.cart);
     
 
@@ -44,37 +46,9 @@ const navigation =
             <div className="relative flex h-24 items-center justify-between">
               
               <div className="flex flex-1 items-center justify-start sm:items-stretch sm:justify-start">
-                <div className="flex flex-shrink-0 items-center">
-                  <img
-                    className="block h-16 w-auto lg:hidden"
-                    src={logo}
-                    alt="Your Company"
-                  />
-          
-                </div>
+                <Logo/>
                 <div className="hidden sm:ml-6 sm:flex items-center ">
-                  <div className="flex space-x-4 font-bold">
-                  
-
-                    {navigation.map((item) => (
-                      
-                      <a
-                        key={item.name}
-                        href={item.href}
-                    
-                        className=
-                        
-                        {classNames(
-                          item.current ? ' text-blue-900 font-bold'  :  'text-white font-bold hover:text-blue-900 ',
-                          'px-3 py-2 rounded-md text-md font-bold'
-                        )}
-                        
-                        aria-current={item.current ? 'page' : undefined}
-                      >
-                        {item.name}
-                      </a>
-                    ))}
-                  </div>
+                  <NavigationPage/>
                 </div>
     
             </div>
@@ -87,7 +61,7 @@ const navigation =
                     <WhatsAppIcon sx={{ fontSize: 28 }}/>
                 </div>
                 <div className='flex-col flex'>
-                    <span className='text-md hover:font-bold text-blue-900 '>012-3456 789</span>
+                    <span className='text-md hover:font-bold text-blue-900 '><a href='https://api.whatsapp.com/send?phone=60198390383&text=Hello%20Teck%20Hong%20Coldstorage%2C%20I%20want%20more%20info%20about%20your%20products!%0A'> 019-839-0383</a></span>
                     <span className='text-xs text-right text-gray-400'>Customer Support</span>
                 </div>
                 
@@ -102,12 +76,14 @@ const navigation =
                         <FacebookOutlinedIcon sx={{ fontSize: 24 }}/>
                     </div>
                 </div>
+                {location.pathname== '/checkout' || location.pathname=== '/checkout/success'  ? null : (
+                
                 <div className="cart-logo flex items-center relative cursor-pointer">
                     <button onClick={() => dispatch(setIsCartOpen({}))}>
                         <ShoppingCartOutlinedIcon sx={{ fontSize: 28 }}/>
                         <span className="absolute left-4 bottom-6 top right bg-orange-600 rounded-full  w-[20px] h-[20px] text-sm text-center text-white" >{cart.length}</span>
                     </button>
-                </div>
+                </div>)}
 
                 </div>
 
@@ -115,10 +91,13 @@ const navigation =
 
               <div className="absolute inset-y-0 right-0 flex items-center gap-4 text-blue-900 sm:hidden">
               <div className="cart-logo flex items-center relative cursor-pointer">
+                {location.pathname==='/checkout' || location.pathname=== '/checkout/success'  ? null : (
+                    
                     <button onClick={() => dispatch(setIsCartOpen({}))}>
                         <ShoppingCartOutlinedIcon sx={{ fontSize: 28 }}/>
                         <span className="absolute left-4 bottom-6 top right bg-orange-600 rounded-full  w-[20px] h-[20px] text-sm text-center text-white" >{cart.length}</span>
                     </button>
+                )}
                 </div>
 
                 {/* Mobile menu button*/}
@@ -143,8 +122,8 @@ const navigation =
                   as="a"
                   href={item.href}
                   className={classNames(
-                    item.current ? 'bg-blue-900/70 text-white ' : 'text-white hover:bg-blue-900/70 font-bold',
-                    'block px-3 py-2 rounded-md text-base font-medium'
+                    item.current ? 'bg-blue-900/70 text-white ' : 'text-white hover:text-blue-900 font-bold',
+                    'block px-3 py-2 rounded-md text-base font-bold'
                   )}
                   aria-current={item.current ? 'page' : undefined}
                 >
@@ -160,7 +139,7 @@ const navigation =
                     <WhatsAppIcon sx={{ fontSize: 28 }}/>
                 </div>
                 <div className='flex-col flex'>
-                    <span className='text-md hover:font-bold text-blue-900 '>012-3456 789</span>
+                    <span className='text-md hover:font-bold text-blue-900 '><a href='https://api.whatsapp.com/send?phone=60198390383&text=Hello%20Teck%20Hong%20Coldstorage%2C%20I%20want%20more%20info%20about%20your%20products!%0A'> 019-839-0383</a></span>
                     <span className='text-xs text-right text-gray-100'>Customer Support</span>
                 </div>
                 
