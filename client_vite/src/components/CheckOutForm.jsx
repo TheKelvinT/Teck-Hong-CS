@@ -6,7 +6,7 @@ import toast, { Toaster } from 'react-hot-toast';
 const CheckOutForm = ({ totalPrice}) => {
   // Style Summart
   const labelStyle = 'text-xs font-semibold text-gray-500'
-  const inputStyle='mt-1 block w-full rounded border-gray-300 bg-gray-50 py-3 px-4 text-sm placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-teal-500'
+  const inputStyle='mt-1 block w-full rounded border-gray-300 bg-gray-50 py-3 px-4 text-sm placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-blue-700'
   const paraStyle = 'mt-10 text-center text-sm font-semibold text-gray-500'
 
   let navigate = useNavigate(); 
@@ -83,7 +83,7 @@ try {
   return (
     <div className=" py-6 px-6 sm:py-8 lg:col-span-6 basis-1/2 ">
     <div className="mx-auto w-full max-w-lg">
-        <h1 className="relative text-lg uppercase text-gray-700 ">Contact Information<span className="mt-2 block h-1 w-10 bg-teal-600 sm:w-20"></span></h1>
+        <h1 className="relative text-lg uppercase text-gray-700 ">Contact Information<span className="mt-2 block h-1 w-10 bg-blue-900 sm:w-20"></span></h1>
       
         <form method="POST"  className="mt-8 flex flex-col space-y-4" >
              <div>
@@ -128,13 +128,13 @@ try {
             <div>
                 <p className={paraStyle}>Your order summary is empty. Click below to shop now!</p>
             <Link to="/">
-            <button type="submit" className="mt-4 inline-flex w-full items-center justify-center rounded bg-teal-600 py-2 px-4 tracking-wide text-white outline-none ring-offset-2 transition focus:ring-2 focus:ring-teal-500 sm:text-lg shadow-md">Shop Now!</button>
+            <button type="submit" className="mt-4 inline-flex w-full items-center justify-center rounded bg-blue-900 hover:bg-blue-700 py-2 px-4 tracking-wide text-white outline-none ring-offset-2 transition focus:ring-2 focus:ring-teal-500 sm:text-lg shadow-md">Shop Now!</button>
             </Link>
             </div>)}
             {cart.length >= 1 && (
                 <div>
-                 <p className={paraStyle}>By placing this order you agree to the <a href="#" className="whitespace-nowrap text-teal-400 underline hover:text-teal-600">Terms and Conditions</a></p>
-            <button type="submit"  onClick={submitOrder} className="mt-4 inline-flex w-full items-center justify-center rounded bg-teal-600 py-2 px-4 tracking-wide text-white outline-none ring-offset-2 transition focus:ring-2 focus:ring-teal-500 sm:text-lg shadow-md">Place Order</button>
+                 <p className={paraStyle}>By placing this order you agree to the <a href="#" className="whitespace-nowrap text-blue-700 underline hover:text-blue-900">Terms and Conditions</a></p>
+            <button type="submit"  onClick={submitOrder} className="mt-4 inline-flex w-full items-center justify-center rounded bg-blue-900 hover:bg-blue-700 py-2 px-4 tracking-wide text-white outline-none ring-offset-2 transition focus:ring-2 focus:ring-teal-500 sm:text-lg shadow-md">Place Order</button>
            
             </div>)}
             </div>

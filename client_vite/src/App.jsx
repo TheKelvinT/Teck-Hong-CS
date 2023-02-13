@@ -13,7 +13,7 @@ import FormSuccess from "./scenes/fetchStatus/FormSuccess";
 function App() {
 
   return (
-    <div className="app">
+    <div className="app ">
       <BrowserRouter>
       <Navbar/>
     <Routes>

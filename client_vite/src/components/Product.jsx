@@ -8,6 +8,7 @@ import {addToCart,increaseCount,decreaseCount} from "../state/cartReducer"
 import { useNavigate } from 'react-router-dom';
 import toast, { Toaster } from 'react-hot-toast';
 
+
 const Product = ({product, width}) => {
     const navigate = useNavigate()
     const dispatch = useDispatch()
@@ -109,10 +110,12 @@ const Product = ({product, width}) => {
                 </span>
                 Add To Cart
               </button>
+            
+            
+             
               
                 </div>
                 </div>
-                
                 
             </div>
            

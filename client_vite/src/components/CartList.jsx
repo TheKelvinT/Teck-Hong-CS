@@ -15,8 +15,8 @@ const CartList = ({cart}) => {
     <div className="mt-8">
     <div className="flow-root">
       <ul role="list"   className="-my-6 divide-y divide-gray-200">
-      {cart.map((product, id) => (
-          <li   key={product?.id} className="flex py-6">
+      {cart.map((product, index) => (
+          <li   key={product?.id || index} className="flex py-6">
             <div  key={product?.id} className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md ">
               <img
                 key={product.id}
@@ -42,7 +42,6 @@ const CartList = ({cart}) => {
                 </p>
               </div>
               <div className="flex flex-1 items-end justify-between text-sm">
-                {/* <p className="text-gray-500">Qty: {product?.count}</p> */}
                  <div className='py-4 text-gray-600 font-bold'>
             <button className='border px-2 py-1 text-center' onClick={() =>
         dispatch(decreaseCount({ id: product.id }))

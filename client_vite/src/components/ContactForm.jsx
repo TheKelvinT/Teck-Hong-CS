@@ -14,7 +14,7 @@ const ContactForm = () => {
     <div className="order-3 md:order-2 col-span-full md:col-span-1 py-5 md:py-8 px-6 text-sm ">
           {/* ::Title Contact Us */}
           <h2 className="text-4xl uppercase mb-4 text-blue-900">Contact us</h2>
-          <form method="POST" action='https://formsubmit.co/1be5c06a0b4c5906a39965738008c804' className="mt-4 flex flex-col space-y-4">
+          <form method="POST" action='https://formsubmit.co/55390f05cc3834e3648dcb8e405b7aea' className="mt-4 flex flex-col space-y-4">
                          <div>
                             <label htmlFor="name" className={labelStyle}>Name</label>
                             <input type="text" id="name" name="name" placeholder="John Doe" required className={inputStyle} />
