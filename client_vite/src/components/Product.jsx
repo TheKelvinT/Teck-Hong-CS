@@ -71,7 +71,7 @@ const Product = ({product, width}) => {
     <div className=''>
         <div className="w-full max-w-sm bg-white rounded-lg shadow-md dark:bg-gray-800 dark:border-gray-700 flex flex-col h-full">
             <div className="p-4 rounded-t-lg flex flex-col flex-auto ">
-                <img className="object-cover h-48 w-full " src={`http://localhost:1337${ url }`} alt={product.name} />
+                <img className="object-cover h-48 w-full " src={`https://strapi-production-0417.up.railway.app${ url }`} alt={product.name} />
                 <div className=' flex flex-col flex-auto'>
                 <div className='py-4 font-bold text-gray-800 text-md flex flex-col flex-auto'>
                 <h3> {product?.attributes?.brand} {product?.attributes?.name}</h3>

@@ -46,7 +46,7 @@ const CheckOutForm = ({ totalPrice}) => {
         image: cart.attributes.image.data.attributes.formats.thumbnail.url
       }));
 try {
-  const response = await fetch("http://localhost:1337/api/orders", {
+  const response = await fetch("https://strapi-production-0417.up.railway.app/api/orders", {
     method: "POST",
     headers: { "Content-Type": "application/json",
     Authorization :'Bearer f49213764c1b6721e8d1ea4de76a998221a1453262a8242e43dd2fc6803ef10818f6d291775aa0ba80c109eee9453645f524ae1e8c9017ead6b5dc6bc8b071351d4d7b6508472c7d5fd1dc939303347ce0ded776d75a72278ca92a406c00ef529721649d820ab394204ae7c74ffd437a70dfe9ce7bf9b152d891c1cdc92cd0a5'},

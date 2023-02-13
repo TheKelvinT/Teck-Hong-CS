@@ -19,80 +19,6 @@ function classNames(...classes) {
   }
   
 const ProductList = () => {
-  let [categories] = useState({
-    'UCL, UK': [
-      {
-        id: 1,
-        header:'University College London',
-        title:'MEng Civil Engineering',
-        location:'@ UK',
-        desc1:'Awarded scholarship from one of Malaysia’s biggest construction firm GAMUDA. ',
-        desc2:'Qualified for the overseas exchange program and continued my 3rd year studies in Hong Kong for a year.',
-        desc3:'Graduated with Second-upper class honors.',
-        desc4:'',
-      },
-    ],
-    'GAMUDA': [
-      {
-        id: 1,
-        header:'GAMUDA ENGINEERING',
-        title:'Project Engineer',
-        location:'',
-        desc1:'Vivamus suscipit tortor eget felis porttitor volutpat. Donec rutrum congue leo eget malesuada.',
-        desc2:'Pellentesque in ipsum id orci porta dapibus. Cras ultricies ligula sed magna dictum porta.',
-        desc3:'Sed porttitor lectus nibh. Proin eget tortor risus.',
-        desc4:'Donec rutrum congue leo eget malesuada. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.',
-      },
-    ],
-    'Gelang Semarak': [
-      {
-        id: 1,
-        header:'Gelang Semarak - Construction',
-        title:'Senior Project Engineer',
-        location:'',
-        desc1:'Donec rutrum congue leo eget malesuada. Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem.',
-        desc2:'Quisque velit nisi, pretium ut lacinia in, elementum id enim. Proin eget tortor risus.',
-        desc3:'Nulla porttitor accumsan tincidunt. Vivamus suscipit tortor eget felis porttitor volutpat.',
-        desc4:'',
-      },
-    ],
-    'Kyzen Bina': [
-      {
-        id: 1,
-        header:'Kyzen Bina - Interior Design Consultant',
-        title:'Project Manager',
-        location:'',
-        desc1:'Awarded scholarship from one of Malaysia’s biggest construction firm GAMUDA. ',
-        desc2:'Qualified for the overseas exchange program and continued my 3rd year studies in Hong Kong for a year.',
-        desc3:'Graduated with Second-upper class honors',
-        desc4:'',
-      },
-    ],
-    'Part-time Courses': [
-      {
-        id: 1,
-        header:'Part-time Courses',
-        title:'',
-        location:'',
-        desc1:'Vivamus suscipit tortor eget felis porttitor volutpat. Curabitur aliquet quam id dui posuere blandit.',
-        desc2:'Curabitur arcu erat, accumsan id imperdiet et, porttitor at sem. Vivamus suscipit tortor eget felis porttitor volutpat.',
-        desc3:'Praesent sapien massa, convallis a pellentesque nec, egestas non nisi. Pellentesque in ipsum id orci porta dapibus.',
-        desc4:'',
-      },
-    ],
-    'Freelancing': [
-      {
-        id: 1,
-        header:'Freelancing',
-        title:'Web Developer',
-        location:'',
-        desc1:'Donec rutrum congue leo eget malesuada. Vivamus suscipit tortor eget felis porttitor volutpat.',
-        desc2:'Qualified for the overseas exchange program and continued my 3rd year studies in Hong Kong for a year.',
-        desc3:'Mauris blandit aliquet elit, eget tincidunt nibh pulvinar a. Proin eget tortor risus.',
-        desc4:'',
-      },
-    ],
-  })
   
   const products = useSelector((state => state.cart.products))
     const dispatch = useDispatch();
@@ -144,7 +70,7 @@ async function getProducts(){
       });
     };
     try {
-      const res = await fetch( "http://localhost:1337/api/products?populate=*" , {method:"GET"});
+      const res = await fetch( "https://strapi-production-0417.up.railway.app/api/products?populate=*" , {method:"GET"});
       // await pause(3000)
       const productsJson = await res.json();
       dispatch(setProducts(productsJson.data))
