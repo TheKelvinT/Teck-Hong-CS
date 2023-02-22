@@ -5,30 +5,31 @@ import Product from '../Product'
 
 const OtherProducts = ({cardStyles,currentPage,setCurrentPage, productsPerPage}) => {
     const products = useSelector((state => state.cart.products))
-    const otherProducts = products.filter(
+    let otherProducts = products.filter(
         (product) => product.attributes.category === "others"
       );
-      console.log(otherProducts)
+      otherProducts = otherProducts.slice().sort((a, b) => a?.attributes?.name.localeCompare(b?.attributes?.name))
+
     const lastProductIndex = currentPage *productsPerPage;
-    console.log(lastProductIndex)
+
     const firstProductIndex = lastProductIndex - productsPerPage
-    console.log(firstProductIndex)
-    const currentProducts = otherProducts.slice(firstProductIndex, lastProductIndex)
-    console.log(currentProducts)
+  
+    const currentProducts = otherProducts?.slice(firstProductIndex, lastProductIndex)
    
-    const totalPage = Math.ceil(otherProducts.length/productsPerPage)
+   
+    const totalPage = Math.ceil(otherProducts?.length/productsPerPage)
 
   return (
      <>
       <div className={cardStyles}>
       {
-          currentProducts.map((currentProducts) => (
+          currentProducts?.map((currentProducts) => (
             <Product product={currentProducts} key={`${currentProducts.name}-${currentProducts.id}`} />
           ))}
 
     </div>
     <Pagination 
-        totalProducts={otherProducts.length} 
+        totalProducts={otherProducts?.length} 
         totalPage = {totalPage}
         productsPerPage={productsPerPage}
         currentPage = {currentPage}

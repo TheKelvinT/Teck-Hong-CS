@@ -9,11 +9,12 @@ import NotFound from "./scenes/fetchStatus/NotFound";
 import Checkout from "./scenes/checkout/Checkout";
 import CheckoutSuccess from "./scenes/fetchStatus/CheckoutSuccess";
 import FormSuccess from "./scenes/fetchStatus/FormSuccess";
+import Policy from "./components/Policy";
 
 function App() {
 
   return (
-    <div className="app ">
+    <div className="app min-h-screen flex flex-col flex-nowrap">
       <BrowserRouter>
       <Navbar/>
     <Routes>
@@ -23,6 +24,7 @@ function App() {
     <Route path="/contact-us/success" element={<FormSuccess />} />
     <Route path="/checkout" element={<Checkout />} />
     <Route path="/checkout/success" element={<CheckoutSuccess />} />
+    <Route path="/policy" element={<Policy />} />
 
   {/* <Route path="checkout/success" element={<Confirmation />} />  */}
 

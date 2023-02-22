@@ -5,24 +5,26 @@ import Product from '../Product'
 
 const SeafoodProducts =({cardStyles,currentPage,setCurrentPage, productsPerPage}) => {
     const products = useSelector((state => state.cart.products))
-    const seafoodProducts = products.filter(
+    let seafoodProducts = products.filter(
         (product) => product.attributes.category === "seafood"
       );
+      seafoodProducts = seafoodProducts.slice().sort((a, b) => a?.attributes?.name.localeCompare(b?.attributes?.name))
+
     const lastProductIndex = currentPage *productsPerPage;
     const firstProductIndex = lastProductIndex - productsPerPage
-    const currentProducts = seafoodProducts.slice(firstProductIndex, lastProductIndex)
-    const totalPage = Math.ceil(seafoodProducts.length/productsPerPage)
+    const currentProducts = seafoodProducts?.slice(firstProductIndex, lastProductIndex)
+    const totalPage = Math.ceil(seafoodProducts?.length/productsPerPage)
   return (
      <>
       <div className={cardStyles}>
       {
-          currentProducts.map((currentProducts) => (
+          currentProducts?.map((currentProducts) => (
             <Product product={currentProducts} key={`${currentProducts.name}-${currentProducts.id}`} />
           ))}
 
     </div>
     <Pagination 
-        totalProducts={seafoodProducts.length} 
+        totalProducts={seafoodProducts?.length} 
         totalPage = {totalPage}
         productsPerPage={productsPerPage}
         currentPage = {currentPage}

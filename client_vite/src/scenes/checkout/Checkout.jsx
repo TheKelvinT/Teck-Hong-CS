@@ -30,14 +30,14 @@ const Checkout = () => {
 
   
   return (
-    <div className="bg-primary-100 bg-opacity-60 h-full w-full">
+    <div className="bg-primary-100 bg-opacity-60 w-full min-h-screen flex flex-col flex-nowrap">
     <div className="sm:w-4/5 mx-auto max-w-2xl py-8 px-4 sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8  "> 
       <div className="flex flex-col-reverse md:flex-row bg-white  rounded-2xl shadow-xl  ">
             <CheckOutForm totalPrice={totalPrice} />
      
          <div className=" flex flex-col pl-4 sm:px-6 py-6 sm:py-8 lg:col-span-4 basis-1/2 bg-gray-50 rounded-b-2xl md:rounded-none md:rounded-r-xl  ">
          <h1 className="relative text-lg uppercase text-gray-700 ">ORDER SUMMARY<span className="my-2 block h-1 w-10 bg-blue-900 sm:w-20"></span></h1>
-            <div className=" max-h-[450px] overflow-auto scrollbar-thin  scrollbar-thumb-blue-900 scrollbar-track-blue-200  ">
+            <div className=" max-h-[330px] overflow-auto scrollbar-thin  scrollbar-thumb-blue-900 scrollbar-track-blue-200  ">
                 <div className='mr-4 pt-4'><CartList cart={cart}/></div>
                 
 

@@ -1,10 +1,17 @@
 import React, {useRef,useState} from 'react'
-
+import { useNavigate } from 'react-router-dom'
 
 const ContactForm = () => {
     const nameRef = useRef()
     const emailRef = useRef()
     const messageRef = useRef()
+
+    
+    let navigate = useNavigate(); 
+    const routeChange = () =>{ 
+      let path = '/contact-us/success'; 
+      navigate(path);
+    }
 
     const labelStyle = "text-xs font-semibold text-gray-500"
     const inputStyle = "mt-1 block w-full rounded border-gray-300 bg-gray-50 py-2 px-4 text-sm placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-blue-800"
@@ -38,11 +45,11 @@ const ContactForm = () => {
                         </div>
 
                         <div>
-                            <button type="submit" className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent shadow-md  text-base font-medium text-white  bg-blue-900 py-2 px-4 tracking-wide  outline-none ring-offset-2 transition  focus:ring-2  font-md hover:bg-blue-700">Send Message</button>
+                            <button type="submit" onClick={routeChange()} className="mt-2 inline-flex w-full items-center justify-center rounded-md border border-transparent shadow-md  text-base font-medium text-white  bg-blue-900 py-2 px-4 tracking-wide  outline-none ring-offset-2 transition  focus:ring-2  font-md hover:bg-blue-700">Send Message</button>
                         </div>
                         <div>
                             <input type="hidden" name="_subject" value="TECK HONG COLDSTORAGE - CONTACT US!  "/>
-                            <input type="hidden" name="_next" value="http://127.0.0.1:5173/contact-us/success"/>
+                            <input type="hidden" name="_captcha" value="false"></input>
                             <input type="hidden" name="_template" value="table"/>
                         </div>
                     </form>

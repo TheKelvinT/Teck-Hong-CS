@@ -20,7 +20,7 @@ const CartList = ({cart}) => {
             <div  key={product?.id} className="h-24 w-24 flex-shrink-0 overflow-hidden rounded-md ">
               <img
                 key={product.id}
-                src={`https://strapi-production-0417.up.railway.app${product?.attributes?.image?.data?.attributes?.formats?.thumbnail?.url}`}
+                src={product?.attributes?.image?.data?.attributes?.formats?.thumbnail?.url}
                 alt={product?.name}
                 className="h-full w-full object-cover object-center"
               />

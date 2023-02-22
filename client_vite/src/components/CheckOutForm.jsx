@@ -1,9 +1,11 @@
 import React,{useState} from 'react'
-import { useSelector } from 'react-redux'
 import { Link, useNavigate } from 'react-router-dom'
 import toast, { Toaster } from 'react-hot-toast';
+import { resetCart } from '../state/cartReducer';
+import { useDispatch, useSelector } from 'react-redux'
 
 const CheckOutForm = ({ totalPrice}) => {
+  
   // Style Summart
   const labelStyle = 'text-xs font-semibold text-gray-500'
   const inputStyle='mt-1 block w-full rounded border-gray-300 bg-gray-50 py-3 px-4 text-sm placeholder-gray-300 shadow-sm outline-none transition focus:ring-2 focus:ring-blue-700'
@@ -14,9 +16,14 @@ const CheckOutForm = ({ totalPrice}) => {
     let path = '/checkout/success'; 
     navigate(path);
   }
+  const handleResetCart = ()=>{
+    dispatch(resetCart())
+    }
+
   const notify =() => toast.error("Invalid or Incomplete Form Input")
   const [error, setError] = useState("");
   const cart = useSelector((state)=>state.cart.cart)
+  const dispatch =useDispatch()
   const [data, setData] = useState({
     name:"",
     email:"",
@@ -45,11 +52,13 @@ const CheckOutForm = ({ totalPrice}) => {
         category: cart.attributes.category,
         image: cart.attributes.image.data.attributes.formats.thumbnail.url
       }));
+     
 try {
-  const response = await fetch("https://strapi-production-0417.up.railway.app/api/orders", {
+  const response = await fetch("https://teckhongcoldstorage.up.railway.app/api/orders", {
     method: "POST",
     headers: { "Content-Type": "application/json",
-    Authorization :'Bearer f49213764c1b6721e8d1ea4de76a998221a1453262a8242e43dd2fc6803ef10818f6d291775aa0ba80c109eee9453645f524ae1e8c9017ead6b5dc6bc8b071351d4d7b6508472c7d5fd1dc939303347ce0ded776d75a72278ca92a406c00ef529721649d820ab394204ae7c74ffd437a70dfe9ce7bf9b152d891c1cdc92cd0a5'},
+    
+    Authorization :'Bearer e52e422482c1a1b88c59729acb698d513de14e995ae368df3aa941524b069aa320967f1c7e7f61a9d13fa9af62ea7949b9ddb1d67bb9804e4e7ed068237fa061e2c5a7c965693e3526929c146d93d5dba2124099a5e0b23bc25a352ddd907be7ecd81127dce415f0c94901761232c58affa84cc5eb0200ef8af57d50624cf750'},
     body: JSON.stringify({
     data:{
       name: data.name,
@@ -63,42 +72,47 @@ try {
       amount: totalPrice,
       ordercart: orderCart
     }
-      
+    
 
     })
   });
 
   if (!response.ok) {
     notify()
+    
     setError(response.statusText);
   } else {
+    handleResetCart()
     routeChange()
+    
+    
   }
 } catch (error) {
-  console.log(error)
+
 }
 
   
 }
+
   return (
     <div className=" py-6 px-6 sm:py-8 lg:col-span-6 basis-1/2 ">
     <div className="mx-auto w-full max-w-lg">
         <h1 className="relative text-lg uppercase text-gray-700 ">Contact Information<span className="mt-2 block h-1 w-10 bg-blue-900 sm:w-20"></span></h1>
       
-        <form method="POST"  className="mt-8 flex flex-col space-y-4" >
+        <form method="POST"  className="mt-8 flex flex-col space-y-6" >
              <div>
              <label htmlFor="name" className={labelStyle}>Name</label>
              <input type="text" id="name" name="name" placeholder="John Doe" required onChange={onChange} className={inputStyle} />
             </div>
             <div>
                 <label htmlFor="email" className={labelStyle}>Email</label>
-                <input type="email" id="email" name="email"  placeholder="john.capler@fang.com" onChange={onChange} className={inputStyle} required />
+                <input type="email" id="email" name="email"  placeholder="john.capler@fang.com" onChange={onChange} className={inputStyle} />
             </div>
             <div>
                 <label htmlFor="phone" className={labelStyle}>Phone Number</label>
                 <input type="number" id="phone" name="phone" required onChange={onChange} onInput={(e) => e.target.value = e.target.value.slice(0, 12)}  placeholder="012 345 6789" className={inputStyle} />
             </div>
-            <div>
+            {/* <div>
                 <label htmlFor="address" className={labelStyle}>Delivery Address</label>
                 <input type="text" id="address" name="address" required onChange={onChange} placeholder="Address" className={inputStyle} />
             </div>
@@ -115,7 +129,7 @@ try {
                 <label htmlFor="state" className={labelStyle}>State</label>
                 <input type="text" id="state" name="state" placeholder="State" onChange={onChange} required className={inputStyle} />
             </div>
-             </div>
+             </div> */}
             
              <div>
              <label htmlFor="state" className={labelStyle}>Additional Note</label>
@@ -124,16 +138,16 @@ try {
             
             <div>
            
-            {cart.length < 1 && (
+            {cart?.length < 1 && (
             <div>
                 <p className={paraStyle}>Your order summary is empty. Click below to shop now!</p>
             <Link to="/">
             <button type="submit" className="mt-4 inline-flex w-full items-center justify-center rounded bg-blue-900 hover:bg-blue-700 py-2 px-4 tracking-wide text-white outline-none ring-offset-2 transition focus:ring-2 focus:ring-teal-500 sm:text-lg shadow-md">Shop Now!</button>
             </Link>
             </div>)}
-            {cart.length >= 1 && (
+            {cart?.length >= 1 && (
                 <div>
-                 <p className={paraStyle}>By placing this order you agree to the <a href="#" className="whitespace-nowrap text-blue-700 underline hover:text-blue-900">Terms and Conditions</a></p>
+                 {/* <p className={paraStyle}>By placing this order you agree to the <Link to="/policy" className="whitespace-nowrap text-blue-700 underline hover:text-blue-900">Terms and Conditions</Link></p> */}
             <button type="submit"  onClick={submitOrder} className="mt-4 inline-flex w-full items-center justify-center rounded bg-blue-900 hover:bg-blue-700 py-2 px-4 tracking-wide text-white outline-none ring-offset-2 transition focus:ring-2 focus:ring-teal-500 sm:text-lg shadow-md">Place Order</button>
            
             </div>)}

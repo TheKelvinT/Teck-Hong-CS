@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link } from 'react-router-dom'
 import KeyboardBackspaceOutlinedIcon from '@mui/icons-material/KeyboardBackspaceOutlined';
-
+import { resetCart } from '../../state/cartReducer';
 const CheckoutSuccess = () => {
   return (
     <div className="bg-primary-100 bg-opacity-60 h-full w-full">
@@ -14,7 +14,7 @@ const CheckoutSuccess = () => {
           </svg>
         <p className="text-3xl md:text-5xl lg:text-6xl font-bold tracking-wider  text-gray-300 mt-2">Thank You!</p>
         <p className="text-sm md:text-lg lg:text-xl text-gray-500 my-8">Your order has been successfully placed! We will contact you to confirm your order soon!</p>
-        <Link className="rounded-full border border-transparent bg-blue-900 py-2 px-4 text-lg font-medium shadow-lg text-white hover:bg-blue-700 focus:outline-none flex  gap-3" to='/about-us'><span><KeyboardBackspaceOutlinedIcon/></span>Return Home</Link>
+        <Link  className="rounded-full border border-transparent bg-blue-900 py-2 px-4 text-lg font-medium shadow-lg text-white hover:bg-blue-700 focus:outline-none flex  gap-3" to='/about-us'><span><KeyboardBackspaceOutlinedIcon/></span>Return Home</Link>
     </div>
  
     </div>

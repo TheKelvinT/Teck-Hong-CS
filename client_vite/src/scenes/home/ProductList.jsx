@@ -30,7 +30,7 @@ const ProductList = () => {
   //  Pagination
    const [width, setWidth] = useState(window.innerWidth);
    const [currentPage, setCurrentPage] = useState(1)
-    const [productsPerPage, setProductsPerPage] = useState(8)
+    const [productsPerPage, setProductsPerPage] = useState(20)
    
     useEffect(() => {
       const handleResize = () => setWidth(window.innerWidth);
@@ -41,11 +41,13 @@ const ProductList = () => {
     }, []);
   
     useEffect(() => {
-      if (width >= 1100 || width <768 ) {
-        setProductsPerPage(8);
+      if (width >= 1100) {
+        setProductsPerPage(20);
       } else if (width >= 768 && width < 1210) {
-        setProductsPerPage(9);
-      } 
+        setProductsPerPage(15);
+      } else if (width <768){
+        setProductsPerPage(10);
+      }
     }, [width]);
 
     const resetPagination = ()=> {
@@ -70,7 +72,7 @@ async function getProducts(){
       });
     };
     try {
-      const res = await fetch( "https://strapi-production-0417.up.railway.app/api/products?populate=*" , {method:"GET"});
+      const res = await fetch( "https://teckhongcoldstorage.up.railway.app/api/products?populate=*" , {method:"GET"});
       // await pause(3000)
       const productsJson = await res.json();
       dispatch(setProducts(productsJson.data))
@@ -95,7 +97,7 @@ if (isLoading) {
 
   return (
     <>
-    <div className="bg-primary-100 bg-opacity-60 h-full w-full">
+    <div className="bg-primary-100 bg-opacity-60 grow w-full min-h-screen flex flex-col flex-nowrap">
       <div className="sm:w-11/12 md:w-4/5 mx-auto max-w-2xl py-12 px-4 sm:py-16 sm:px-6 lg:max-w-7xl lg:px-8 ">
       <h3 className='text-center font-bold text-2xl text-blue-900 mb-8' >Our Products</h3>
         <Tab.Group>
@@ -106,7 +108,7 @@ if (isLoading) {
             <Tab className={tabStyles} onClick={resetPagination}>Lamb</Tab>
             <Tab className={tabStyles} onClick={resetPagination}>Seafood</Tab>
             <Tab className={tabStyles} onClick={resetPagination}>Japanese</Tab>
-            <Tab className={tabStyles} onClick={resetPagination}>Others</Tab> 
+            <Tab className={tabStyles} onClick={resetPagination}>Miscellaneous</Tab> 
  
           </Tab.List> 
           <Tab.Panels className="my-4 " > 
@@ -137,7 +139,11 @@ if (isLoading) {
               </Tab.Panel>
               </Tab.Panels>
         </Tab.Group>
+        <div className='italic'>
+        <p>*est - Estimated Price only. Final price depends on actual weight.</p>
+       </div>
       </div>
+      
     </div>
 
   </>

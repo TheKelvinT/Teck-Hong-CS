@@ -1,5 +1,6 @@
 import React from 'react'
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
+import CallOutlinedIcon from '@mui/icons-material/CallOutlined';
 import FacebookLink from './SocialLinks/FacebookLink';
 import InstagramLink from './SocialLinks/InstagramLink';
 const ContactInfo = () => {
@@ -19,8 +20,13 @@ const ContactInfo = () => {
               <EmailOutlinedIcon className="mr-2 w-5" />
               teckhongcs@outlook.com
             </a>
+             {/* ::Email contact */}
+             <a href="tel:083326899" className="inline-flex items-center text-sm text-blue-900 font-semibold hover:text-blue-700">
+              <CallOutlinedIcon className="mr-2 w-5" />
+              083-326899
+            </a>
             {/* ::Address */}
-            <p className= "text-sm mb-3 text-gray-500 leading-6" >699, Jln Hospital, Pekan Sri Aman, <br /> 95000 Sri Aman, <br /> Sarawak</p>
+            <p className= "text-sm mb-3 text-gray-500 leading-6" >669, Jln Hospital, Pekan Sri Aman, <br /> 95000 Sri Aman, <br /> Sarawak</p>
             {/* ::Socials */}
             <div className="flex items-center">
               {/* :FACEBOOK */}

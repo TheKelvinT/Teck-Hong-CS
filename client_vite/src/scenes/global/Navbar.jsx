@@ -8,7 +8,7 @@ import StorefrontOutlinedIcon from '@mui/icons-material/StorefrontOutlined';
 import { Menu, Disclosure, Transition, Tab } from '@headlessui/react';
 import { useDispatch, useSelector } from 'react-redux'
 import { setIsCartOpen } from "../../state/cartReducer";
-import { Link, useLocation } from 'react-router-dom';
+import { Link, NavLink, useLocation } from 'react-router-dom';
 import Logo from '../../components/Logo';
 import NavigationPage from '../../components/NavigationPage';
 import InstagramLink from '../../components/SocialLinks/InstagramLink';
@@ -49,7 +49,7 @@ const navigation =
             </div>
           
           {/* Socials */}  
-            <div className='hidden sm:flex gap-8 text-blue-900'>
+            <div className='hidden sm:flex gap-4 text-blue-900'>
               <div className="flex items-center gap-2 cursor-pointer">
                 <div className='text-[#075E54] '>
                     <WhatsAppIcon sx={{ fontSize: 28 }}/>
@@ -68,7 +68,7 @@ const navigation =
                 </div>
               </div>
     
-              <div className='flex items-center gap-4'>
+              <div className='flex items-center gap-2'>
                 <FacebookLink />
                 <InstagramLink/>
                 
@@ -115,19 +115,17 @@ const navigation =
 
           <Disclosure.Panel className="sm:hidden">
             <div className="space-y-1 px-2 pt-4 pb-3 ">
-              {navigation.map((item) => (
-                <Disclosure.Button
-                  key={item.name}
-                  as="a"
-                  href={item.href}
+              {navigation?.map((item) => (
+                <NavLink
+                  key={item.label}
+                  to={item.href}
                   className={classNames(
                     item.current ? 'bg-blue-900/70 text-white ' : 'text-white hover:text-blue-900 font-bold',
                     'block px-3 py-2 rounded-md text-base font-bold'
                   )}
-                  aria-current={item.current ? 'page' : undefined}
                 >
                   {item.name}
-                </Disclosure.Button>
+                </NavLink>
               ))}
 
     

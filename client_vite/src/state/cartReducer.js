@@ -54,8 +54,8 @@ export const cartSlice = createSlice({
         (product) => product.id !== action.payload
       );
     },
-    resetCart: (state, action) => {
-      state.products = [];
+    resetCart: (state) => {
+      state.cart = [];
     },
     increaseCount: (state, action) => {
       state.cart = state.cart.map((product) => {
